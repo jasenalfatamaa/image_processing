@@ -3,11 +3,13 @@ version: '3.8'
 services:
   redis:
     image: redis:alpine
+    container_name: my-redis
     ports:
       - "6379:6379"
 
   backend:
     build: ./backend
+    container_name: my-backend
     command: uvicorn main:app --host 0.0.0.0 --port 8000
     volumes:
       - ./backend:/app
@@ -22,6 +24,7 @@ services:
 
   worker:
     build: ./backend
+    container_name: my-worker
     command: celery -A tasks worker --loglevel=info
     volumes:
       - ./backend:/app
@@ -31,10 +34,14 @@ services:
       - REDIS_URL=${REDIS_URL}
     depends_on:
       - redis
+      - backend
 
   frontend:
     image: nginx:alpine
+    container_name: my-frontend
     ports:
       - "3000:80"  # Akses melalui http://localhost:3000
     volumes:
       - ./frontend:/usr/share/nginx/html
+    depends_on:
+      - backend
