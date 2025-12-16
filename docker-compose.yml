@@ -37,11 +37,10 @@ services:
       - backend
 
   frontend:
-    image: nginx:alpine
+    build: 
+      context: ./frontend  # Arahkan ke folder frontend
     container_name: my-frontend
     ports:
-      - "3000:80"  # Akses melalui http://localhost:3000
-    volumes:
-      - ./frontend:/usr/share/nginx/html
+      - "3000:80" # Akses di browser via localhost:3000
     depends_on:
       - backend
