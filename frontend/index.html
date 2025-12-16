@@ -1,28 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Processor Queue</title>
-    <style>
-        body { font-family: sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-        .status-box { margin-top: 20px; padding: 10px; border: 1px solid #ddd; background: #f9f9f9; }
-        #result-image { max-width: 100%; margin-top: 10px; display: none; }
-    </style>
-</head>
-<body>
-    <h1>Async Image Processor</h1>
-    <p>Upload gambar, sistem akan memprosesnya di background (Queue).</p>
-
-    <input type="file" id="imageInput" accept="image/*">
-    <button onclick="uploadImage()">Process Image</button>
-
-    <div id="statusBox" class="status-box" style="display:none;">
-        <p><strong>Status:</strong> <span id="statusText">Waiting...</span></p>
-        <p><strong>Task ID:</strong> <span id="taskId"></span></p>
-        <img id="resultImage" src="" alt="Processed Result">
-    </div>
-
-    <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>frontend</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
