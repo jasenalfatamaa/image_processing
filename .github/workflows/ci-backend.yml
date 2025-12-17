@@ -7,34 +7,34 @@ on:
     branches: [ main ]
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest
 
-        services:
-            # menjalankan redis secara otomatis untuk testing Celery
-            redis:
-                image: redis:latest
-                ports:
-                    - 6379:6379
-            
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v3
+    services:
+      redis:
+        image: redis:latest
+        ports:
+          - 6379:6379
 
-            - name: Set up Python
-              uses: actions/setup-python@v4
-              with:
-                  python-version: '3.11'
-            
-            - name: Install dependencies
-              run: |
-                  python -m pip install --upgrade pip
-                  pip install -r requirements.txt
-                  pip install pytest pytest-asyncio
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-            - name: Run tests
-              env:
-                  REDIS_URL: redis://localhost:6379 # set redis url for testing
-                run: |
-                    cd backend
-                    pytest tests/
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio httpx
+
+      - name: Run tests
+        env:
+          REDIS_URL: redis://localhost:6379
+        run: |
+          cd backend
+          pytest tests/
