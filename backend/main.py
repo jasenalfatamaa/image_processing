@@ -1,10 +1,18 @@
 import shutil
 import os
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from tasks import process_image_task, celery_app
 from celery.result import AsyncResult
+from pydantic import BaseModel
+from typing import Optional
+import json
+
+class ProcessOptions(BaseModel): 
+    resize: bool = False
+    grayscale: bool = False
+    target_format: str = "original" # opsi: original, jpg, png, webp
 
 app = FastAPI()
 
@@ -31,14 +39,18 @@ app.add_middleware(
 app.mount("/results", StaticFiles(directory=PROCESSED_FOLDER), name = "results")
 
 @app.post("/upload/")
-async def upload_image(file: UploadFile = File(...)):
+async def upload_image(
+    file: UploadFile = File(...),
+    options: str = Form(...) # dikirim sebagai string json dari frontend
+):
+    options_dict = json.loads(options)
     # simpan file asli
-    file_location = os.path.join(UPLOAD_FOLDER, file.filename)
+    file_location = os.path.join(UPLOAD_FOLDER, file.filename,)
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
     # kirim tugas ke celery secara asynchronous
-    task = process_image_task.delay(file_location, file.filename)
+    task = process_image_task.delay(file_location, file.filename, options_dict)
 
     return {
         "task_id": task.id,
