@@ -16,6 +16,7 @@ Sistem pengolahan gambar asinkron yang tangguh menggunakan **FastAPI**, **Celery
 - **Modern Tech Stack**: React (Frontend), FastAPI (Backend), dan Celery (Task Queue).
 
 ## 🏗️ Arsitektur Sistem
+```mermaid
 graph TD
     User((User/Browser)) -->|Upload Image| React[React Frontend]
     React -->|API Request| FastAPI[FastAPI Backend]
@@ -23,7 +24,7 @@ graph TD
     Redis -->|Pull Task| Worker[Celery Worker]
     Worker -->|Process Image| Storage[(Local Storage/Output)]
     Worker -->|Update Status| Redis
-
+```
 
 ## 🛠️ Instalasi & Penggunaan Lokal
 
