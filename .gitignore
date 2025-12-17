@@ -6,3 +6,6 @@ __pycache__/
 celery*.log
 
 .env
+
+processed_images/
+uploads/

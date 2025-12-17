@@ -29,13 +29,13 @@ def process_image_task(file_path, filename, options):
     # 3. Logika format conversion & save
     target_format = options.get("target_format", "original")
     if target_format == "original": 
-        output_path = f"outputs/processed_{os.path.basename(file_path)}"
+        output_path = f"processed_images/processed_{os.path.basename(file_path)}"
     else:
         file_name = os.path.splitext(os.path.basename(file_path))[0]
-        output_path = f"outputs/{file_name}.{target_format}"
+        output_path = f"processed_images/{file_name}.{target_format}"
     
     img.save(output_path)
-    return {"status": "SUCCESS", "result_path": output_path}
+    return {"status": "SUCCESS", "file": output_path}
 
 
 

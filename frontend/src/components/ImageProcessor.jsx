@@ -53,6 +53,7 @@ const ImageProcessor = () => {
         
         const formData = new FormData();
         formData.append("file", file);
+        formData.append('options', JSON.stringify(options)); // Kirim sebagai string JSON
 
         try {
             const res = await fetch(`${API_URL}/upload/`, {
@@ -72,6 +73,12 @@ const ImageProcessor = () => {
             setStatusMsg("Failed to upload image.");
         }
     };
+
+    const [options, setOptions] = useState({
+        resize: false,
+        grayscale: false,
+        target_format: 'original'
+    });
 
     return (
         <div className="min-h-screen bg-base-200 flex items-center justify-center p-4">
@@ -107,6 +114,50 @@ const ImageProcessor = () => {
                         </figure>
                     )}
 
+                    {/* Option Area */}
+                    <div className="bg-base-200 p-6 rounded-lg shadow-md mt-4">
+                        <h3 className="text-lg font-semibold mb-4 text-gray-700">Processing Options</h3>
+                        
+                        <div className="space-y-3">
+                            {/* Grayscale Toggle */}
+                            <label className="flex items-center space-x-3 cursor-pointer">
+                                <input 
+                                    type="checkbox" 
+                                    checked={options.grayscale}
+                                    onChange={(e) => setOptions({...options, grayscale: e.target.checked})}
+                                    className="form-checkbox h-5 w-5 text-blue-600" 
+                                />
+                                <span className="text-gray-700">Apply Grayscale Filter</span>
+                            </label>
+
+                            {/* Resize Toggle */}
+                            <label className="flex items-center space-x-3 cursor-pointer">
+                                <input 
+                                    type="checkbox" 
+                                    checked={options.resize}
+                                    onChange={(e) => setOptions({...options, resize: e.target.checked})}
+                                    className="form-checkbox h-5 w-5 text-blue-600" 
+                                />
+                                <span className="text-gray-700">Resize to Standard (800px Width)</span>
+                            </label>
+
+                            {/* Format Selector */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Target Format</label>
+                                <select 
+                                    value={options.target_format}
+                                    onChange={(e) => setOptions({...options, target_format: e.target.value})}
+                                    className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                >
+                                    <option value="original">Original Format</option>
+                                    <option value="png">PNG</option>
+                                    <option value="jpeg">JPEG</option>
+                                    <option value="webp">WebP</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Status & Progress */}
                     <div className="mt-4">
                         {(status === 'uploading' || status === 'processing') && (
@@ -114,9 +165,20 @@ const ImageProcessor = () => {
                         )}
                         
                         {status === 'success' && (
-                            <div className="alert alert-success text-sm py-2">
-                                <span>✅ Processing Complete!</span>
+                            <div className="flex flex-col gap-2">
+                                <div className="alert alert-success text-sm py-2">
+                                    <span>✅ Processing Complete!</span>
+                                </div>
+                                {/* Tombol Download Baru */}
+                                <a 
+                                    href={resultUrl} 
+                                    download 
+                                    className="btn btn-outline btn-success btn-sm w-full"
+                                >
+                                    📥 Download Result
+                                </a>
                             </div>
+                            
                         )}
                         
                         {status === 'error' && (
