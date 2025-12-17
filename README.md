@@ -2,7 +2,7 @@
 
 # 📸 Image Processing System with FastAPI & Celery
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/USERNAME/REPO_NAME/ci-backend.yml?branch=main&style=for-the-badge)
+![Build Status](https://img.shields.io/github/actions/workflow/status/jasenalfatamaa/image_processing/ci-backend.yml?branch=main&style=for-the-badge)
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
@@ -41,7 +41,7 @@ BACKEND_PORT:8000
 ### Langkah-langkah
 1. Clone repository ini:
    ```bash
-   git clone [https://github.com/USERNAME/REPO_NAME.git](https://github.com/USERNAME/REPO_NAME.git)
+   git clone [https://github.com/jasenalfatamaa/image_processing.git](https://github.com/jasenalfatamaa/image_processing.git)
    cd image_processing
 2. Jalankan aplikasi menggunakan Docker Compose:
    ```bash
