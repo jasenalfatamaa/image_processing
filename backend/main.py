@@ -36,6 +36,9 @@ app.add_middleware(
 
 
 # Endpoint untuk serve gambar hasil
+# buat folder jika belum ada
+if not os.path.exists(PROCESSED_FOLDER):
+    os.makedirs(PROCESSED_FOLDER)
 app.mount("/results", StaticFiles(directory=PROCESSED_FOLDER), name = "results")
 
 @app.post("/upload/")
