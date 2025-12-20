@@ -51,7 +51,7 @@ def process_image_task(file_path, filename, options):
         save_params["quality"] = 95  # kualitas tinggi tanpa kompresi signifikan
         save_params["optimize"] = False
     
-    file_name = f"processed_{os.path.basename(file_path)}"
+    file_name = f"processed_{os.path.splitext(os.path.basename(file_path))[0]}.{save_format}"
     output_path = os.path.join("processed_images", file_name)
     
     # SImpan dengan parameter kompresi

@@ -105,6 +105,15 @@ const ImageProcessor = () => {
         target_format: 'original'
     });
 
+    // cek apakah ada opsi yang dipilih
+    const isOptionChanged = 
+        options.resize ||
+        options.grayscale ||
+        options.compress ||
+        options.target_format !== 'original';
+    
+    const isButtonDisabled = !file || status === "processing" || status === "uploading" || !isOptionChanged;
+
     return (
         <div className="min-h-screen bg-base-200 flex items-center justify-center p-4">
             <div className="card w-150 bg-base-100 shadow-xl transition-all hover:shadow-2xl">
@@ -238,11 +247,18 @@ const ImageProcessor = () => {
                         <button 
                             className={`btn btn-primary w-full ${status === 'uploading' || status === 'processing' ? 'loading' : ''}`}
                             onClick={handleUpload}
-                            disabled={!file || status === 'uploading' || status === 'processing'}
+                            disabled={isButtonDisabled}
                         >
                             {status === 'uploading' ? 'Uploading...' : 
                              status === 'processing' ? 'Processing...' : 'Start Processing'}
                         </button>
+
+                        {/* Tampilkan pesan instruksi jika file ada tapi opsi belum dipilih */}
+                        {file && !isOptionChanged && status !== "processing" && (
+                            <p className="mt-2 text-xs text-amber-600 text-center italic">
+                                * Please select at least one processing option to start.
+                            </p>
+                        )}
                     </div>
                 </div>
             </div>
