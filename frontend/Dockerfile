@@ -4,6 +4,10 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
+
+# Run tests
+RUN npm run test
+
 RUN npm run build
 
 # Stage 2: Serve
