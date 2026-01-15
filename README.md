@@ -1,31 +1,32 @@
 # 💎 NeoImage: Neural Processing Engine
 
 [![GitHub CI](https://github.com/jasenalfatamaa/image_processing/actions/workflows/ci.yml/badge.svg)](https://github.com/jasenalfatamaa/image_processing/actions/workflows/ci.yml)
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://neoimage.vercel.app)
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
 ![Vitest](https://img.shields.io/badge/-Vitest-7E9B4F?style=for-the-badge&logo=vitest&logoColor=white)
 
-**NeoImage** adalah platform pengolahan gambar *high-fidelity* yang menggabungkan kecepatan **FastAPI**, ketangguhan **Celery**, dan desain **Premium React**. Dirancang dengan arsitektur asinkron yang terdistribusi untuk menangani tugas pemrosesan gambar yang berat tanpa mengorbankan pengalaman pengguna.
+**NeoImage** is a high-fidelity image processing platform that combines the speed of **FastAPI**, the robustness of **Celery**, and the elegance of **Premium React**. It is designed with a distributed asynchronous architecture to handle heavy image processing tasks without compromising the user experience.
 
 ---
 
-## ✨ Fitur Unggulan
+## ✨ Key Features
 
-- 🧠 **Neural Upscale**: Resampling gambar cerdas untuk meningkatkan resolusi (HD support).
-- 🌓 **Deep Monochrome**: Konversi grayscale dengan kontras tinggi yang artistik.
-- ⚡ **Smart Optimization**: Kompresi cerdas yang menjaga integritas visual namun mengurangi ukuran file secara signifikan.
-- 🔄 **Real-time Engine**: Menggunakan **WebSockets** untuk pembaruan status pemrosesan secara instan langsung dari worker.
-- 📥 **Forced Download**: Fitur unduhan langsung (Save As) untuk hasil transformasi.
-- 🎭 **Demo Mode Proxy**: Deteksi cerdas status backend yang memungkinkan UI tetap interaktif via simulasi saat offline.
-- 🧪 **Build Guard**: Integrasi testing otomatis di Docker build stage untuk menjamin kualitas kode produksi.
+- 🧠 **Neural Upscale**: Intelligent image resampling to increase resolution (HD support).
+- 🌓 **Deep Monochrome**: Artistic grayscale conversion with high contrast.
+- ⚡ **Smart Optimization**: Intelligent compression that preserves visual integrity while significantly reducing file size.
+- 🔄 **Real-time Engine**: Uses **WebSockets** for instant processing status updates directly from the worker.
+- 📥 **Forced Download**: Direct download feature (Save As) for transformation results.
+- 🎭 **Demo Mode Proxy**: Intelligent backend status detection that allows the UI to remain interactive via simulation when offline.
+- 🧪 **Build Guard**: Integration of automated testing in the Docker build stage to ensure production code quality.
 
 ---
 
-## 🏗️ Arsitektur Sistem
+## 🏗️ System Architecture
 
-NeoImage menggunakan arsitektur *Decoupled Distributed* yang menjamin skalabilitas tinggi.
+NeoImage utilizes a *Decoupled Distributed* architecture to ensure high scalability.
 
 ```mermaid
 graph TD
@@ -61,7 +62,7 @@ graph TD
 
 ---
 
-## �️ Tech Stack
+## 🛠️ Tech Stack
 
 ### Frontend
 - **React 18** + **Vite**
@@ -84,9 +85,9 @@ graph TD
 
 ## 🚀 Quick Start
 
-### Menggunakan Docker (Rekomendasi)
+### Using Docker (Recommended)
 
-Pastikan Anda telah menginstal **Docker Desktop**.
+Make sure you have **Docker Desktop** installed.
 
 1. **Clone Repo**
    ```bash
@@ -94,29 +95,30 @@ Pastikan Anda telah menginstal **Docker Desktop**.
    cd image_processing
    ```
 
-2. **Jalankan Cluster**
+2. **Run Cluster**
    ```bash
    docker-compose up --build
    ```
 
-3. **Akses Dashboard**
+3. **Access Dashboard**
    - **Frontend**: `http://localhost:3000`
    - **API Docs (Swagger)**: `http://localhost:8000/docs`
+   - **Live Demo (Frontend Only)**: [neoimage.vercel.app](https://neoimage.vercel.app)
 
 ---
 
 ## 🧪 Testing & Quality Assurance
 
-Proyek ini telah mengimplementasikan **Build-Stage Testing**. Kode tidak akan bisa di-build menjadi container image jika tes gagal.
+This project implements **Build-Stage Testing**. Code cannot be built into a container image if tests fail.
 
-### Menjalankan Tes Secara Manual
+### Running Tests Manually
 - **Backend**: `cd backend && python -m pytest tests/`
 - **Frontend**: `cd frontend && npm run test`
 
 ---
 
 ## 🗺️ Roadmap
-- [ ] Integrasi AI Upscaling (Local Model / OpenAI).
+- [ ] AI Upscaling Integration (Local Model / OpenAI).
 - [ ] Cloud Storage (AWS S3 / Supabase Storage).
 - [ ] Batch Processing (Multiple images upload).
 - [ ] User Authentication & Workspace.
